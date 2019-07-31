@@ -9,7 +9,25 @@
     <form th:action="@{/check}" th:method="post">
         用 户：<input type="text" th:name="username"><br>
         密 码：<input type="text" th:name="password"><br>
-        <input type="submit" value="登录">
+        <input type="submit" value="查询">
     </form>
+    <form th:action="@{/selectAllUsers}" th:method="post">
+        <input type="submit" value="查询所有">
+    </form>
+    <form th:action="@{/addUser}" th:method="post">
+        用 户：<input type="text" th:name="username"><br>
+        密 码：<input type="text" th:name="password"><br>
+        <input type="submit" value="添加">
+    </form>
+    <form th:action="@{/deleteUser}" th:method="post">
+        id：<input type="text" th:name="id"><br>
+        <input type="submit" value="删除">
+    </form>
+    <form th:action="@{/updateUser}" th:method="post">
+        id：<input type="text" th:name="id"><br>
+        密码：<input type="text" th:name="password"><br>
+        <input type="submit" value="改密">
+    </form>
+
 </body>
 </html>
