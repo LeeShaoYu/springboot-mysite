@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * @author Administrator
  */
-@Mapper
+
 public interface UserMapper {
 
     UserDO selectUser(@Param("username") String username, @Param("password") String password);
