@@ -2,12 +2,14 @@ package com.shaoyu.mysite.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 用户类
  */
 
 @Data
-public class UserDO {
+public class UserDO implements Serializable {
 
     /**
      * 用户id

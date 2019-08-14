@@ -3,7 +3,10 @@ package com.shaoyu.mysite.service.serviceImpl;
 import com.shaoyu.mysite.dao.UserMapper;
 import com.shaoyu.mysite.domain.UserDO;
 import com.shaoyu.mysite.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 插入用户
@@ -69,9 +75,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDO> selectAll() {
 
+
         List<UserDO> userDOList = userMapper.selectAll();
 
         return userDOList;
+    }
+
+    @Override
+    public UserDO selectById(Integer id) {
+        String key = ""+id;
+        ValueOperations<String , UserDO> operations = redisTemplate.opsForValue();
+        Boolean has = redisTemplate.hasKey(key);
+        if (has){
+            UserDO user = operations.get(key);
+            System.out.println("从缓存");
+            System.out.println(user.getUsername());
+            return user;
+        }else {
+            UserDO user = userMapper.selectById(id);
+            System.out.println(user.getUsername());
+            operations.set(key, user);
+            return user;
+        }
     }
 
 

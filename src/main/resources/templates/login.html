@@ -28,6 +28,9 @@
         密码：<input type="text" th:name="password"><br>
         <input type="submit" value="改密">
     </form>
-
+    <form th:action="@{/selectById}" th:method="post">
+        id：<input type="text" th:name="id"><br>
+        <input type="submit" value="查询">
+    </form>
 </body>
 </html>

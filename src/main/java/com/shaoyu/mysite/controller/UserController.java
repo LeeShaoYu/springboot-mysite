@@ -22,6 +22,7 @@ public class UserController {
 
     /**
      * 首页
+     *
      * @return
      */
     @RequestMapping("/index")
@@ -32,46 +33,48 @@ public class UserController {
 
     /**
      * 添加
+     *
      * @param userDO
      * @return
      */
     @RequestMapping("/addUser")
-    public String addUser(UserDO userDO){
+    public String addUser(UserDO userDO) {
         userService.insertUser(userDO);
         return "success";
     }
 
     @ResponseBody
     @RequestMapping("/deleteUser")
-    public String deleteUser(int id){
+    public String deleteUser(int id) {
         int index = userService.deleteUser(id);
-        if (index != 0){
+        if (index != 0) {
             return "success";
-        }else {
+        } else {
             return "fail";
         }
     }
 
     @ResponseBody
     @RequestMapping("/updateUser")
-    public String updateUser(int id, String password){
+    public String updateUser(int id, String password) {
         int index = userService.updateUser(id, password);
-        if (index != 0){
+        if (index != 0) {
             return "success";
-        }else {
+        } else {
             return "fail";
         }
     }
 
     /**
      * 查询
+     *
      * @param username
      * @param password
      * @return
      */
     @ResponseBody
     @RequestMapping("/check")
-    public String login(@Param("username") String username, @Param("password") String password){
+    public String login(@Param("username") String username, @Param("password") String password) {
         UserDO user = userService.selectUser(username, password);
 
         return user.toString();
@@ -82,12 +85,23 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/selectAllUsers")
-    public JSONObject selectAllUsers(Model model){
-        List<UserDO> userDOList =  userService.selectAll();
+    public JSONObject selectAllUsers(Model model) {
+        List<UserDO> userDOList = userService.selectAll();
         JSONObject json = new JSONObject();
-        for (UserDO userDO : userDOList){
-            json.put(""+userDOList.indexOf(userDO), userDO.toString());
+        for (UserDO userDO : userDOList) {
+            json.put("" + userDOList.indexOf(userDO), userDO.toString());
         }
         return json;
+    }
+
+    /**
+     * 查询id
+     */
+    @ResponseBody
+    @RequestMapping("/selectById")
+    public String selectById(@Param("id") Integer id) {
+        UserDO user = userService.selectById(id);
+
+        return user.toString();
     }
 }

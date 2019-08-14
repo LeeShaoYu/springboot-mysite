@@ -1,6 +1,7 @@
 package com.shaoyu.mysite.service;
 
 import com.shaoyu.mysite.domain.UserDO;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +40,7 @@ public interface UserService {
      */
     public List<UserDO> selectAll();
 
+
+    UserDO selectById(Integer id);
 
 }

@@ -24,5 +24,5 @@ public interface UserMapper {
 
     UserDO selectUser(@Param("username") String username, @Param("password") String password);
 
-
+    UserDO selectById(@Param("id") Integer id);
 }

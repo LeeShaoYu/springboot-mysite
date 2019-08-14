@@ -29,5 +29,9 @@
         select id, username, password
         from user
     </select>
+    <select id="selectById" resultType="com.shaoyu.mysite.domain.UserDO">
+        select * from user
+        where id = ${id}
+    </select>
 
 </mapper>
